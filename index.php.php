@@ -1,5 +1,3 @@
-<?php
-
 $heroku buildpacks:set PHP https://github.com/heroku/heroku-buildpack-php
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -38,4 +36,3 @@ else
 	echo "Method not allowed";
 }
 
-?>
