@@ -1,6 +1,6 @@
 <?php
 
-$heroku buildpacks:set https://github.com/heroku/heroku-buildpack-php
+$heroku buildpacks:set PHP https://github.com/heroku/heroku-buildpack-php
 $method = $_SERVER['REQUEST_METHOD'];
 
 if($method == "POST"){
