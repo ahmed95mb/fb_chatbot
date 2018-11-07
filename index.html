@@ -1,0 +1,727 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login - Everus</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--===============================================================================================-->
+    <!--STYLE-->
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/everus_title_icon.png" />
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+    <!--===============================================================================================-->
+    <!--SCRIPTS-->
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <script src="js/main.js"></script>
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+
+
+</head>
+<body>
+
+
+    <div class="main_container" style="background: url('images/background_image.jpg') no-repeat center; background-size:cover;" id="after_validate_style">
+        <div class="container_sing-in-up  p-t-80 p-b-30">
+            <div class="logo">
+                <img src="images/Everus-Logo.png">
+            </div>
+            <!-------------------------------------------------------------------------------------------------------------------->
+            <!--SIGN-IN CONTENT-->
+            <!-------------------------------------------------------------------------------------------------------------------->
+            <div class="container_sign_in">
+                <div class="wlc_message">
+                    <p class="wlc_txt">WELCOME,  <span class="plz_signin_txt">PLEASE SIGN IN</span></p>
+                </div>
+                <!-- 2 STEP VERIFICATION HIDDEN CONTAINER and SIGN-IN BUTTON-->
+                <div class="two_step_container" style="display:none;">
+                    <div class="step_vertification_container">
+                        <div>
+                            <img class="message_icon" src="images/2fa_ver_img.png" />
+                        </div>
+                        <div class="txt_for_step_ver">
+                            <p class="step_verification_txt">
+                                Two-Factor Authentication
+                            </p>
+                        </div>
+                        <div class="form_container">
+
+                            <div id="six_digit_form">
+                                <input id="box-1" class="box" type="text" disabled style="display: none"/>
+                                <input id="box-2" class="box" type="text" disabled style="display: none"/>
+                                <input id="box-3" class="box" type="text" disabled style="display: none"/>
+                                <input id="box-4" class="box" type="text" disabled style="display: none"/>
+                                <input id="box-5" class="box" type="text" disabled style="display: none"/>
+                                <input id="box-6" class="box" type="text" disabled style="display: none"/>
+                            </div>
+                            <!--Alert tooltip for wrong 2FA code-->
+
+                            <div class="invalid_verification_code_tooltip">
+                                <span class="invalid_verification_code_tooltiptext">Please enter valid verification code</span>
+                            </div>
+
+                            <div>
+                                <button class="request_2fa_btn">
+                                    Request 2FA Code
+                                </button>
+                            </div>
+                            <div class="countdown">
+                            </div>
+                            <div class="twofa_txt_description" style="display:none;">
+                                A message with a verification code has been send to your email or device.
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <!--button for sign-in-->
+                    <div class="sign_in_button_container" style="display:none;">
+                        <button class="sign_in_button" disabled>
+                            VERIFY
+                        </button>
+                    </div>
+                </div>
+
+                <!--Tooltip alert when email is not registered -->
+                <div class="email_not_registered_alert" style="display:none;">
+                    <p class="email_not_registered_txt">
+                        This Email ID has not yet register.
+                    </p>
+                </div>
+
+                <!--Hidden text for forgot password page-->
+                <div class="forgot-password-wlc-txt" id="forgot_password_wlc_txt" style="display:none;">
+                    <div class="forgot_pass_txt">
+                        FORGOT PASSWORD
+                    </div>
+                    <div class="forgot_pass_desr">
+                        Enter your email address to receive an email with a reset link
+                    </div>
+                </div>
+
+                <div class="password-reset-link-txt" id="password-reset-link-txt" style="display:none">
+                    <div class="reset_link_txt_container">
+                        <p class="forgot_pass_txt">
+                            FORGOT PASSWORD
+                        </p>
+                        <p class="reset_link_txt">
+                            We have e-mailed your password reset link!
+                        </p>
+                    </div>
+                </div>
+
+                <!--Username text field -->
+                <div class="username_text_field validate-input m-b-20" data-validate="Enter username or email" id="usr_name_txt_field">
+
+                    <input class="usr_name_txt_field" id="change_btn" type="text" name="username" placeholder="Email ID" autocomplete="off" capitalize="off" autocorrect="off" />
+                    <button class="sign_in_btn" id="btn" type="button">
+                        <img id="white_btn" src="images/sign_in.png" />
+                        <img id="purple_btn" src="images/sign_in2.png" style="display:none;" />
+                        <img id="green_alrt" src="images/success_alert.png" style="display:none;" />
+                    </button>
+                </div>
+
+                <!--Tooltip alert when email is incorrect -->
+                <div class="incorrect_email_tooltip">
+                    <span class="incorrect_email_tooltiptext">E-mail address incorrect!</span>
+                </div>
+
+                <!--Forgot password text field -->
+                <div class="forgot_password_text_field m-b-20" style="display:none;" id="forgot_password">
+                    <input class="forgot_ps_txt_field" id="change_btn_forgot_pass" type="text" name="forgot_password" placeholder="Email Address" autocomplete="off" autocorrect="off" autocapitalize="off">
+                    <button class="forgot_pass_btn" id="btn2" type="button">
+                        <img id="white_btn1" src="images/sign_in.png" />
+                        <img id="purple_btn1" src="images/sign_in2.png" style="display:none;" />
+                    </button>
+                </div>
+
+                <!--Alert for not registered email/username in "Forgot Password page"-->
+                <div class="cant_find_user_tooltip">
+                    <span class="tooltiptext">We can't find a user with that e-mail address.</span>
+                </div>
+
+                <!--Alert for incorrect email/username in "Forgot Password page"-->
+                <div class="incorrect_user_tooltip">
+                    <span class="tooltiptext2">Please fill in correct e-mail address.</span>
+                </div>
+
+                <!--Alert for no input in "Forgot Password page"-->
+                <div class="fill_empty_field_tooltip">
+                    <span class="fill_empty_field_tooltiptext">Fill out this empty field</span>
+                </div>
+
+                <!--Password text field -->
+                <div class="password_text_field validate-input m-b-25" id="toggle_form" style="display:none;" data-validate="Enter password">
+                    <input class="pass_txt_field_sign-in" id="sign_in_btn_pass" type="password" name="password_sign_in" placeholder="Password">
+                    <button class="sign_in_btn" id="btn3" type="button">
+                        <img id="white_btn2" src="images/sign_in.png" />
+                        <img id="purple_btn2" src="images/sign_in2.png" style="display:none;" />
+                        <img id="green_alrt2" src="images/success_alert.png" style="display:none;" />
+                    </button>
+                </div>
+
+                <!--Alert for Incorect password-->
+                <div class="incorrect_password_tooltip">
+                    <span class="tooltiptext_incorrect_password">Your password was incorrect <button class="forgot_password_tooltip_txt_link">Forgot Password?</button></span>
+                </div>
+
+
+
+                <!--Captcha Image Text for demo purpouse [Change "src="images/word-captcha.png"" to "" src="images/capt_img_txt.jpg"
+        for google captcha demo, also need to un-comment the "for captcha DEMO" jquery in "main.js", change style in "main.css"
+        for the ".capcha_txt_img" by deleting the height, and chnaging the width to 250px, then delete "captcha_txt_field_container"]-->
+                <div class="captcha_txt" style="display:none;">
+                    <div class="captcha_word_cont">
+                        <p class="decr_captcha" >Can't read the words below? Try different words or an audio captcha.</p>
+                        <img class="captcha_txt_img" src="images/word-captcha.png" />
+                        <img class="captcha_txt_img2" src="images/capt_img_txt2.jpg" />
+                        <div class="captcha_txt_field_container">
+                            <input class="captcha_txt_field" type="text" name="captcha" placeholder="Type text here" autocomplete="off" capitalize="off" autocorrect="off" />
+                        </div>
+                    </div>
+                </div>
+                <div class="captcha_image">
+                    <img class="captcha_pop_up_image" src="images/capt_img.jpg" />
+                </div>
+
+                <!--Buttons container going "back" & "next" for "forgot password page"-->
+                <div class="back_next_btn_conatiner">
+                    <div class="container-back_button1" style="display:none;" id="back-btn1">
+                        <button class="back_button1">
+                            BACK
+                        </button>
+                    </div>
+                    <div class="container-next-btn-forgot-pw" style="display:none;">
+                        <button class="next-btn-forgot-pw">
+                            NEXT
+                        </button>
+                    </div>
+                </div>
+
+                <!--Container for "forgot password button'" and "Next button" -->
+
+                <div class="forgot_and_next_btn_container">
+
+                    <!-- Forgot password button/link-->
+                    <div class="forgot_pass_btn_container" id="forgot_pass_btn/link">
+                        <button class="txt2 hov1" id="forgot_pass_btn">
+                            Forgot password?
+                        </button>
+                    </div>
+
+                    <!--Next button for sign-in-->
+
+                    <div class="container-next-btn">
+                        <button class="next-btn">
+                            NEXT
+                        </button>
+                    </div>
+
+                    <div class="container-next-btn2">
+                        <button class="next-btn2">
+                            NEXT
+                        </button>
+                    </div>
+
+                    <div class="container-next-btn3">
+                        <button class="next-btn3">
+                            NEXT
+                        </button>
+                    </div>
+                </div>
+                <!--Button for creating account-->
+                <div class="container-create-acc-btn" style="display:none;">
+                    <button class="create-acc-btn">
+                        CREATE ACCOUNT
+                    </button>
+                </div>
+
+
+
+                <!--Sing-up content 'android/ios'-->
+
+                <div class="sign-up-content-app">
+                    <div class="sign-up-txt">
+                        SIGN UP USING EVERUS APP
+                    </div>
+                    <div class="icon_container">
+                        <div class="apple_store_icon">
+                            <a href="https://itunes.apple.com/us/app/everus/id1335536622?mt=8">
+                                <img src="images/Apple Store - White.png"
+                                     onmouseover="this.src='images/Apple Store - Black.png'"
+                                     onmouseout="this.src='images/Apple Store - White.png'"
+                                     border="0" alt="" />
+                            </a>
+                        </div>
+                        <div class="google_store_icon">
+                            <a href="https://play.google.com/store/apps/details?id=com.everus.org&hl=en_US">
+                                <img src="images/Google Play - White.png"
+                                     onmouseover="this.src='images/Google Play - Black.png'"
+                                     onmouseout="this.src='images/Google Play - White.png'"
+                                     border="0" alt="" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-back_button2" style="display:none;" id="back-btn2">
+                    <button class="back_button2">
+                        BACK
+                    </button>
+                </div>
+
+            </div>
+
+
+            <!------------------------------------------------------------------------------------------------------------------------->
+            <!--SIGN-UP HIDDEN CONTENT-->
+            <!------------------------------------------------------------------------------------------------------------------------->
+            <div class="container_sign_up" style="display:none;">
+
+                <!--Welcome message for sign up-->
+                <div class="wlc_message">
+                    <p class="wlc_txt">WELCOME,  <span class="plz_signin_txt">PLEASE SIGN UP</span></p>
+                </div>
+
+                <!--Container for user's first and last name-->
+                <div class="user_and_lastname_container">
+                    <div class="first_name">
+                        <input class="first_name_txt_field" type="text" name="user_first_name" placeholder="Name *" autocomplete="off" autocorrect="off" autocapitalize="off" />
+                        <div class="only_char_tooltip">
+                            <span class="only_char_tooltiptext">Enter valid character for your name </span>
+                        </div>
+                        <div class="alert_first_name_txt" style="display:none;">
+                            Enter first name
+                        </div>
+                    </div>
+                    <div class="last_name">
+                        <input class="last_name_txt_field" type="text" name="user_last_name" placeholder="Last Name *" autocomplete="off" autocorrect="off" autocapitalize="off" />
+                        <div class="alert_last_name_txt" style="display:none;">
+                            Enter last name
+                        </div>
+                    </div>
+                    <div class="only_char_tooltip2">
+                        <span class="only_char_tooltiptext2">Enter valid character for your name </span>
+                    </div>
+                </div>
+
+
+                <!--Container for select country code-->
+                <div class="country_code_container">         
+                    <select required  class="country_code_txt_field" id="country">
+                        <option value="" selected hidden>Select Country Code *</option>
+                        <option value="Afghanistan">Afghanistan</option>
+                        <option value="Albania">Albania</option>
+                        <option value="Algeria">Algeria</option>
+                        <option value="Andorra">Andorra</option>
+                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Armenia">Armenia</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Azerbaijan">Azerbaijan</option>
+                        <option value="Bahamas">Bahamas</option>
+                        <option value="Bahrain">Bahrain</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="Barbados">Barbados</option>
+                        <option value="Belarus">Belarus</option>
+                        <option value="Belgium">Belgium</option>
+                        <option value="Belize">Belize</option>
+                        <option value="Benin">Benin</option>
+                        <option value="Bhutan">Bhutan</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                        <option value="Botswana">Botswana</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Brunei">Brunei</option>
+                        <option value="Bulgaria">Bulgaria</option>
+                        <option value="Burkina Faso">Burkina Faso</option>
+                        <option value="Burundi">Burundi</option>
+                        <option value="Cambodia">Cambodia</option>
+                        <option value="Cameroon">Cameroon</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Cape Verde">Cape Verde</option>
+                        <option value="Central African Republic">Central African Republic</option>
+                        <option value="Chad">Chad</option>
+                        <option value="Chile">Chile</option>
+                        <option value="China">China</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Comoros">Comoros</option>
+                        <option value="Congo">Congo</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Cote d'Ivoire">Cote d'Ivoire</option>
+                        <option value="Croatia">Croatia</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="Cyprus">Cyprus</option>
+                        <option value="Czech Republic">Czech Republic</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="Djibouti">Djibouti</option>
+                        <option value="Dominica">Dominica</option>
+                        <option value="Dominican Republic">Dominican Republic</option>
+                        <option value="East Timor">East Timor</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="El Salvador">El Salvador</option>
+                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+                        <option value="Eritrea">Eritrea</option>
+                        <option value="Estonia">Estonia</option>
+                        <option value="Ethiopia">Ethiopia</option>
+                        <option value="Fiji">Fiji</option>
+                        <option value="Finland">Finland</option>
+                        <option value="France">France</option>
+                        <option value="Gabon">Gabon</option>
+                        <option value="Gambia">Gambia</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Greece">Greece</option>
+                        <option value="Grenada">Grenada</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Guinea">Guinea</option>
+                        <option value="Guinea-Bissau">Guinea-Bissau</option>
+                        <option value="Guyana">Guyana</option>
+                        <option value="Haiti">Haiti</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="Hong Kong">Hong Kong</option>
+                        <option value="Hungary">Hungary</option>
+                        <option value="Iceland">Iceland</option>
+                        <option value="India">India</option>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Iran">Iran</option>
+                        <option value="Iraq">Iraq</option>
+                        <option value="Ireland">Ireland</option>
+                        <option value="Israel">Israel</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Jamaica">Jamaica</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Jordan">Jordan</option>
+                        <option value="Kazakhstan">Kazakhstan</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="Kiribati">Kiribati</option>
+                        <option value="North Korea">North Korea</option>
+                        <option value="South Korea">South Korea</option>
+                        <option value="Kuwait">Kuwait</option>
+                        <option value="Kyrgyzstan">Kyrgyzstan</option>
+                        <option value="Laos">Laos</option>
+                        <option value="Latvia">Latvia</option>
+                        <option value="Lebanon">Lebanon</option>
+                        <option value="Lesotho">Lesotho</option>
+                        <option value="Liberia">Liberia</option>
+                        <option value="Libya">Libya</option>
+                        <option value="Liechtenstein">Liechtenstein</option>
+                        <option value="Lithuania">Lithuania</option>
+                        <option value="Luxembourg">Luxembourg</option>
+                        <option value="Macedonia">Macedonia</option>
+                        <option value="Madagascar">Madagascar</option>
+                        <option value="Malawi">Malawi</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Maldives">Maldives</option>
+                        <option value="Mali">Mali</option>
+                        <option value="Malta">Malta</option>
+                        <option value="Marshall Islands">Marshall Islands</option>
+                        <option value="Mauritania">Mauritania</option>
+                        <option value="Mauritius">Mauritius</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="Micronesia">Micronesia</option>
+                        <option value="Moldova">Moldova</option>
+                        <option value="Monaco">Monaco</option>
+                        <option value="Mongolia">Mongolia</option>
+                        <option value="Montenegro">Montenegro</option>
+                        <option value="Morocco">Morocco</option>
+                        <option value="Mozambique">Mozambique</option>
+                        <option value="Myanmar">Myanmar</option>
+                        <option value="Namibia">Namibia</option>
+                        <option value="Nauru">Nauru</option>
+                        <option value="Nepal">Nepal</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Nicaragua">Nicaragua</option>
+                        <option value="Niger">Niger</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Oman">Oman</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="Palau">Palau</option>
+                        <option value="Panama">Panama</option>
+                        <option value="Papua New Guinea">Papua New Guinea</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Peru">Peru</option>
+                        <option value="Philippines">Philippines</option>
+                        <option value="Poland">Poland</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="Puerto Rico">Puerto Rico</option>
+                        <option value="Qatar">Qatar</option>
+                        <option value="Romania">Romania</option>
+                        <option value="Russia">Russia</option>
+                        <option value="Rwanda">Rwanda</option>
+                        <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                        <option value="Saint Lucia">Saint Lucia</option>
+                        <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                        <option value="Samoa">Samoa</option>
+                        <option value="San Marino">San Marino</option>
+                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                        <option value="Saudi Arabia">Saudi Arabia</option>
+                        <option value="Senegal">Senegal</option>
+                        <option value="Serbia and Montenegro">Serbia and Montenegro</option>
+                        <option value="Seychelles">Seychelles</option>
+                        <option value="Sierra Leone">Sierra Leone</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Slovakia">Slovakia</option>
+                        <option value="Slovenia">Slovenia</option>
+                        <option value="Solomon Islands">Solomon Islands</option>
+                        <option value="Somalia">Somalia</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Sri Lanka">Sri Lanka</option>
+                        <option value="Sudan">Sudan</option>
+                        <option value="Suriname">Suriname</option>
+                        <option value="Swaziland">Swaziland</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Switzerland">Switzerland</option>
+                        <option value="Syria">Syria</option>
+                        <option value="Taiwan">Taiwan</option>
+                        <option value="Tajikistan">Tajikistan</option>
+                        <option value="Tanzania">Tanzania</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Togo">Togo</option>
+                        <option value="Tonga">Tonga</option>
+                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                        <option value="Tunisia">Tunisia</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="Turkmenistan">Turkmenistan</option>
+                        <option value="Tuvalu">Tuvalu</option>
+                        <option value="Uganda">Uganda</option>
+                        <option value="Ukraine">Ukraine</option>
+                        <option value="United Arab Emirates">United Arab Emirates</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="United States">United States</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Uzbekistan">Uzbekistan</option>
+                        <option value="Vanuatu">Vanuatu</option>
+                        <option value="Vatican City">Vatican City</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Vietnam">Vietnam</option>
+                        <option value="Yemen">Yemen</option>
+                        <option value="Zambia">Zambia</option>
+                        <option value="Zimbabwe">Zimbabwe</option>
+                    </select>
+                </div>
+
+                <!--Alert for empty field in Country code-->
+                <div class="alert_country_code_container" style="display:none;">
+                    <div class="alert_country_code_txt">
+                        Select Country
+                    </div>
+                </div>
+
+                <!--Container for mobile number-->
+                <div class="container_mob_number">
+                    <div class="mob_code_cont">
+                        <input class="mob_code_txt_field" type="text" name="mobile_code" placeholder="Code *" autocomplete="off" autocorrect="off" autocapitalize="off"  />
+                    </div>
+                    <div class="mob_number_cont">
+                        <input class="mob_num_txt_field" type="number" name="mobile_num" placeholder="Mobile Number *" autocomplete="off" autocorrect="off" autocapitalize="off" />
+                    </div>
+                </div>
+
+                <!--Alert for empty mobile number field-->
+                <div class="alert_mob_num_container" style="display:none;">
+                    <div class="alert_mob_num_txt">
+                        This value is required
+                    </div>
+                </div>
+
+                <!--Container for user's email-->
+                <div class="container_email">
+                    <input class="email_txt_field" type="text" name="user_email" placeholder="Email ID *" autocomplete="off" autocorrect="off" autocapitalize="off" />
+                </div>
+
+                <!--Alert for empty email field-->
+                <div class="alert_email_container" style="display:none;">
+                    <div class="alert_email_txt">
+                        Enter email
+                    </div>
+                </div>
+
+                <!--Container for user's password-->
+                <div class="container_password">
+                    <input class="new_usr_password_txt_field" type="password" name="user_password" placeholder="Password *" autocomplete="off" autocorrect="off" autocapitalize="off" />
+                </div>
+
+                <!--Alert for weak password-->
+                <div class="alert_password_container" style="display:none;">
+                    <div class="alert_password_txt">
+                        Weak (should be atleast 8 characters.)
+                    </div>
+                </div>
+
+                <!--Container for user's confirm password-->
+                <div class="container_confirm_password">
+                    <input class="new_usr_confirm_password_txt_field" type="password" name="user_confirm_password" placeholder="Confirm Password *" autocomplete="off" autocorrect="off" autocapitalize="off" />
+                </div>
+
+                <!--Alert for confirm password-->
+                <div class="alert_conf_password_container" style="display:none;">
+                    <div class="alert_conf_password_txt">
+                        Confirm Password Should be same to Password
+                    </div>
+                </div>
+
+                <!--Container for upline referral code-->
+                <div class="container_referral_code">
+                    <input class="referral_code_txt_field" type="text" name="referral_code" placeholder="Upline Referral Code" autocomplete="off" autocorrect="off" autocapitalize="off" />
+                    <img class="verified_icon" src="images/success_alert.png"  />
+                </div>
+
+                <!--Tooltip alert for invalid referral code-->
+                <div class="invalid_referral_tooltip">
+                    <span class="invalid_referral_tooltiptext">Invalid Upline Referral Code</span>
+                </div>
+
+                <!--Tooltip alert for not accepting the agreements-->
+                <div class="not_accpt_tooltip">
+                    <span class="not_accpt_tooltip">You must agree with the terms and conditions in order to continue</span>
+                </div>
+
+                <!--Container for user agreement-->
+                <div class="container_user_agreement">
+                    <input class="checkbox_usr_agreement" type="checkbox" name="user_agreement" />
+                    <p class="usr_agreement_txt">I agree to the User Agreement and Privacy Policy.</p>
+                </div>
+
+
+                <!--Captcha images for demo-->
+                <div class="container_captcha_sign_up">
+                    <img class="sign_up_captcha_txt" src="images/capt_img_txt.jpg" />
+                    <img class="sign_up_captcha_txt2" src="images/capt_img_txt2.jpg" style="display:none;" />
+                </div>
+                <div class="sign_up_popup_capcha_img" style="display:none;">
+                    <img class="sign_up_captcha_img" src="images/capt_img.jpg" />
+                </div>
+
+                <!--Button for create account in sign-up page-->
+                <div class="create_acc_button_container">
+                    <button class="create_acc_button">
+                        CREATE ACCOUNT
+                    </button>
+                </div>
+
+                <!--Button for sign-in in the sign-up page-->
+                <div class="sign_in_button_container1">
+                    <button class="sign_in_button1">
+                        SIGN IN
+                    </button>
+                </div>
+            </div>
+
+            <!------------------------------------------------------------------------------------------------->
+            <!--VERIFY YOUR EMAIL after sign-up-->
+            <!------------------------------------------------------------------------------------------------->
+
+            <div class="verify_page" style="display:none;">
+
+                <div class="wlc_message">
+                    <p class="wlc_txt">WELCOME,  <span class="plz_signin_txt">PLEASE SIGN UP</span></p>
+                </div>
+
+                <div class="verify_email_container">
+                    <div class="envelop_img_container">
+                        <img class="envelop" src="images/envelop.png" />
+                    </div>
+                    <div class="verify_email_txt_container">
+                        <p class="verify_email_txt">VERIFY YOUR EMAIL</p>
+                    </div>
+                    <div class="description_txt_container">
+                        <p class="description1">We send a verification email to</p>
+
+                        <!--For DEMO purpose the email displayed is static-->
+                        <p class="email_given_for_sign_up"></p>
+                        <p class="description1">Click on the link to get started!</p>
+                        <p class="description2">If you are still not receiving the verification email, please click on</p>
+                        <button class="resend_verif_email">Resend Verification Email</button>
+                    </div>
+
+                    
+
+                </div>
+                <div class="spacing1"></div>
+            </div>
+
+            <div class="footer_container">
+
+                <div class="join_us">
+                    Follow @EverusWorld
+                </div>
+
+                <!--Social media icons with their link-->
+                <div class="row">
+                    <div class="column">
+                        <a href="https://www.facebook.com/everusworld/" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.facebook.com/everusworld/&amp;source=gmail&amp;ust=1538721400970000&amp;usg=AFQjCNF_6iDkZWEiFD3dYiPtaBQ47VcacA" />
+                        <img src="images/Facebook.png" alt="Facebook" />
+                    </div>
+                    <div class="column">
+                        <a href="https://twitter.com/everusworld/" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://twitter.com/everusworld/&amp;source=gmail&amp;ust=1538721400970000&amp;usg=AFQjCNEbSUnvnmjPrRhAuURFJjFfe0YiWQ" />
+                        <img src="images/Twitter.png" alt="Twitter" />
+                    </div>
+                    <div class="column">
+                        <a href="https://www.youtube.com/channel/UCVdOQ4RGe2CCfbDhtVAFexA" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.youtube.com/channel/UCVdOQ4RGe2CCfbDhtVAFexA&amp;source=gmail&amp;ust=1538721400970000&amp;usg=AFQjCNED7UBjpHACD_SkjQpshZbgSaZU7g" />
+                        <img src="images/Youtube.png" alt="Youtube" />
+                    </div>
+                    <div class="column">
+                        <a href="https://www.instagram.com/everusworld/" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.instagram.com/everusworld/&amp;source=gmail&amp;ust=1538721400970000&amp;usg=AFQjCNGjEzcyji7NEAeeHIJkjjrYafFGWA" />
+                        <img src="images/Instagram.png" alt="Instagram" />
+                    </div>
+                    <div class="column">
+                        <a href="https://plus.google.com/u/1/+EverusWorld" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://plus.google.com/u/1/%2BEverusWorld&amp;source=gmail&amp;ust=1538721400970000&amp;usg=AFQjCNFPYQcSKcA7NfLT45rXtPSELkxkgg" />
+                        <img src="images/Googleplus.png" alt="Googleplus" />
+                    </div>
+                    <div class="column">
+                        <a href="https://www.linkedin.com/company/everusworld" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.linkedin.com/company/everusworld&amp;source=gmail&amp;ust=1538721400970000&amp;usg=AFQjCNHobEWq38uSDJp7IgsP9dDr35bwlg" />
+                        <img src="images/LinkedIn.png" alt="LinkedIn" />
+                    </div>
+                    <div class="column">
+                        <a href="https://medium.com/@everus.org" target="_blank" />
+                        <img src="images/Media.png" alt="Media" />
+                    </div>
+                    <div class="column">
+                        <a href="https://www.reddit.com/r/everus/" target="_blank" />
+                        <img src="images/Telegram.png" alt="Telegram" />
+                    </div>
+                </div>
+
+                <!--Privacy, Policy and copyright-->
+                <div class="privacy_policy">
+                    <a href="https://everus.org/privacyPolicy" class="hov1">Privacy Policy </a> <a href="https://everus.org/terms" class="hov1">| Terms & Conditions </a>
+                </div>
+                <div class="copyright">
+                    Copyright © 2018 Everus Technologies. All trademarks and copyrights belong to their respective owners.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
